@@ -1,32 +1,37 @@
-check_admin_pw();
+// check_admin_pw();
 
-function check_admin_pw() {
-    let pw = prompt("Type in Password", "");
-    if (pw) {
+// function check_admin_pw() {
+//     let pw = prompt("Type in Password", "");
+//     if (pw) {
 
-        let r_data = {};
-        r_data['cmd'] = "check_admin_access";
-        r_data['pw'] = pw;
+//         let r_data = {};
+//         r_data['cmd'] = "check_admin_access";
+//         r_data['pw'] = pw;
 
-        $.ajax({
-            url : "api/crossy_db.php",
-            type : "post",
-            data : r_data,
-            success : (res) => {
-                res = JSON.parse(res);
-                if (res['access']) {
-                    get_scores();
-                    // screen_adjustment();
-                } else {
-                    check_admin_pw();
-                }
+//         $.ajax({
+//             url : "api/crossy_db.php",
+//             type : "post",
+//             data : r_data,
+//             success : (res) => {
+//                 res = JSON.parse(res);
+//                 if (res['access']) {
+//                     get_scores();
+//                     // screen_adjustment();
+//                 } else {
+//                     check_admin_pw();
+//                 }
                 
-            }
-        })
-    } else {
-        check_admin_pw();
-    }
-}
+//             }
+//         })
+//     } else {
+//         check_admin_pw();
+//     }
+// }
+
+$(document).ready(function(){
+    get_scores();
+});
+
 
 function start_timer(t = 0, m = 0) {
 
