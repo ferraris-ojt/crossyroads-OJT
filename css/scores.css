@@ -1,0 +1,57 @@
+body {
+    background: url('../images/1003.gif');
+    background-size: 150% 150%;
+    background-position-x: center;
+    background-repeat: no-repeat;
+}
+
+#m_cont {
+    /* background-color: white; */
+    overflow: hidden;
+    padding: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.gold {
+    color : #FFBE38
+}
+
+.friyay {
+    font-weight: 900;
+    text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.450);
+}
+
+#scoreboard {
+    border: 5px solid #1712ba;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.450);
+}
+
+th {
+    color: #1712ba;
+    text-align: center;
+    font-size: 26px;
+}
+td {
+    border: 2px solid #1712ba;
+    white-space: nowrap;
+    font-size: 20px;
+    color: #1712ba;
+}
+
+.td-custom {
+    text-align: center;
+}
+
+#timer {
+    cursor: default;
+    color: #1712ba;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 900;
+    margin-left: 50%;
+}

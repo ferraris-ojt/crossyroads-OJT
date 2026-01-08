@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>Crossy Road Scoreboard</title>
+    </head>
+    <body>
+        <div id="m_cont" class="container-fluid row">
+
+            <div id="left_graphs" class="col-md-4">
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="mt-1" style="text-align: center;font-size: 46px;">
+                    <span class="friyay text-warning">F</span>
+                    <span class="friyay text-primary">R</span>
+                    <span class="friyay text-secondary">I</span>
+                    <span class="friyay text-success">Y</span>
+                    <span class="friyay text-danger">A</span>
+                    <span class="friyay text-info">Y</span>
+                </div>
+                <table id="scoreboard">
+                </table>
+            </div>
+
+            <div id="right_graphs" class="col-md-4">
+                <div style="margin-top: 40px;text-align: right;">
+                    <button class="btn btn-sm btn-warning w-50 mb-1" style="font-weight: bolder;" onclick="reset_scores()">Reset Scores</button>
+                    <br>
+                    <button class="btn btn-sm btn-success w-50 mb-1" style="font-weight: bolder;" onclick="grant_game_access(1)">Allow Game Access</button>
+                    <br>
+                    <button class="btn btn-sm btn-danger w-50" style="font-weight: bolder;" onclick="grant_game_access()">Disallow Game Access</button>
+                    <br>
+                </div>
+
+                <div style="margin-top: 5px;text-align: right;">
+                    <button id="start_timer" class="btn btn-sm btn-primary w-50 mb-1" style="font-weight: bolder;" onclick="start_timer(0, 0)">Start Timer</button>
+                    <div id="timer"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </body>
+
+    <link rel="stylesheet" href="dist/font-awesome/css/all.css" type="text/css">
+    <link href="dist/bootstrap-5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="dist/bootstrap-5.1.3/js/bootstrap.min.js"></script>
+    <script src="dist/bootstrap-5.1.3/popper.js"></script>
+
+    <script src="dist/jquery-3.6.0.min.js"></script>
+
+
+    <link href="css/scores.css" rel="stylesheet">
+    <script src="js/topscores.js"></script>
+
+</html>

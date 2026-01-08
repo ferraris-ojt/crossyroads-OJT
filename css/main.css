@@ -1,0 +1,85 @@
+@font-face {
+    font-family: "Arcade Classic";
+    src: url(../dist/fonts/ARCADECLASSIC.TTF) format("truetype");
+}
+
+body {
+    background: url('../images/1003.gif');
+    background-size: 100% 100%;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    /* font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; */
+    font-family: "Arcade Classic" ;
+}
+
+div {
+    margin: 0px;
+    cursor: default;
+}
+
+#game_canvas {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* background-color: black; */
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 5px 5px 10px 0px black;
+    border-radius: 10px;
+}
+#score {
+    font-size: 100px;
+    text-align: center;
+}
+
+#banner {
+    font-size: 80px;
+    text-align: center;
+    color: white;
+    text-shadow: 4px 3px 0px black;
+}
+
+#name {
+    font-size: 40px;
+    text-shadow: -2px 2px 0 purple;
+}
+
+#play_button {
+    font-size: 20px;
+}
+
+.card {
+    /* border: 2px solid rgba(0,0,0,0.125); */
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.card-header {
+    /* border-bottom: 2px solid rgba(0,0,0,0.125); */
+}
+
+.card-body {
+    color: black;
+    text-align: left;
+    font-size: 16px;
+}
+
+
+.input-group {
+    border: 1px solid rgba(0,0,0,0.125);
+}
+
+.input-group-text {
+    border: none;
+    font-size: 14px;
+}
+
+.form-control {
+    border: none;
+}
+
+.btn-custom {
+    width: 250px;
+}
