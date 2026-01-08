@@ -52,10 +52,10 @@ window.addEventListener("keydown", (e) => {
                 case "ArrowRight":
                     crossy.k = "KeyD";
                     break;
-                // case "KeyS":
-                // case "ArrowDown":
-                //     crossy.k = "KeyS";
-                //     break;
+                case "KeyS":
+                case "ArrowDown":
+                    crossy.k = "KeyS";
+                    break;
                 case "Space":
                     crossy.k = "Space";
                     break;
@@ -436,6 +436,7 @@ function draw(ts) {
 
     let pgy = crossy.y <= 4 ? crossy.y : 4;
     ctx.save();
+    //hitbox
     // ctx.fillStyle = "green";
     // ctx.fillRect(crossy.x * game_vals.scale, (game_vals.yy - 1 - pgy) * game_vals.scale, 1 * game_vals.scale, 1 * game_vals.scale);
     // let ia = imgAni['froggy'];
@@ -520,9 +521,9 @@ function update(ts) {
                         crossy.x++; 
                     }
                     break;
-                // case "KeyS":
-                //     if (crossy.y > 0) { crossy.y--; }
-                //     break;
+                case "KeyS":
+                    if (crossy.y > 0) { crossy.y--; }
+                    break;
                 case "Space":
                     // Obstacle
                     if (!game_vals.lo[crossy.y + 1] || (game_vals.lo[crossy.y + 1] && game_vals.lo[crossy.y + 1][crossy.x] != "ld1")) {
