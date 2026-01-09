@@ -440,7 +440,10 @@ function draw(ts) {
     // ctx.fillStyle = "green";
     // ctx.fillRect(crossy.x * game_vals.scale, (game_vals.yy - 1 - pgy) * game_vals.scale, 1 * game_vals.scale, 1 * game_vals.scale);
     // let ia = imgAni['froggy'];
+    
     ctx.drawImage(imgArr['froggy'], imgAni['froggy'][crossy.anii], 0, 139, 117, crossy.x * game_vals.scale, (game_vals.yy - 1 - pgy) * game_vals.scale, 1 * game_vals.scale, 1 * game_vals.scale);
+    //ctx. drawImage(source, source_x, source_y, source_w, source_h, dest_x, dest_y, dest_w, dest_h)
+    
     ctx.restore();
     
 
@@ -523,7 +526,9 @@ function update(ts) {
                     break;
                 case "KeyS":
                     if (crossy.y > 0) { crossy.y--; }
+                    crossy.anii = 0;
                     break;
+                    
                 case "Space":
                     // Obstacle
                     if (!game_vals.lo[crossy.y + 1] || (game_vals.lo[crossy.y + 1] && game_vals.lo[crossy.y + 1][crossy.x] != "ld1")) {
