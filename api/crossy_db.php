@@ -374,7 +374,7 @@
             
         }
 
-        echo $sql;
+        // echo $sql;
     }
 
     function get_scores() {

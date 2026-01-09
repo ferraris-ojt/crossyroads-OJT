@@ -31,6 +31,10 @@ const crossy = {
     kpint : 100,
     kpts : 0,
     score : 0,
+    count : 0, //# of space
+    lastspc: 0, //time since last space (forward jump)
+    bonus: 0, //bonus points
+    bonuspts: 3 //points per combo
 }
 
 
@@ -196,6 +200,10 @@ function initialize() {
     crossy.kpint = 100;
     crossy.kpts = 0;
     crossy.score = 0;
+    crossy.count = 0;
+    crossy.lastspc = 0;
+    crossy.bonus = 0;
+    crossy.bonuspts = 3;
 
     // canvas.width = (game_vals.x - game_vals.xx) * game_vals.scale;
     canvas.width = game_vals.x * game_vals.scale;
@@ -342,8 +350,8 @@ function check_status(ts) {
         }
     }
 
-    
-    crossy.score = crossy.y;
+    // score = row # + bonus points
+    crossy.score = crossy.y + crossy.bonus;
 
 }
 
@@ -509,6 +517,7 @@ function update(ts) {
     anim_proc(ts);
     // add ts so as not to spam
 
+    //movement animation
     if (ts - crossy.kpts >= crossy.kpint) {
         if (crossy.k != "") {
             switch (crossy.k) {
@@ -517,19 +526,40 @@ function update(ts) {
                         crossy.anii = 6;
                         crossy.x--; 
                     }
+                    crossy.count = 0;
                     break;
+
                 case "KeyD":
                     if (crossy.x < game_vals.x - 1) { 
                         crossy.anii = 10;
                         crossy.x++; 
                     }
+                    crossy.count = 0;
                     break;
+
                 case "KeyS":
                     if (crossy.y > 0) { crossy.y--; }
                     crossy.anii = 0;
+                    crossy.count = 0;
                     break;
                     
                 case "Space":
+                    //check time limit for combo
+                    if(ts - crossy.lastspc > 1000){
+                        crossy.count = 0;
+                    }
+
+
+                    crossy.count += 1;
+                    crossy.lastspc = ts;
+
+                    if (crossy.count >= 3){
+                        //increase score per jump
+                        crossy.bonus += crossy.bonuspts;
+                        // console.log("orig score", crossy.y)
+                        // console.log("bonus points", crossy.bonus)
+                    }
+
                     // Obstacle
                     if (!game_vals.lo[crossy.y + 1] || (game_vals.lo[crossy.y + 1] && game_vals.lo[crossy.y + 1][crossy.x] != "ld1")) {
                         crossy.y++;    
