@@ -380,7 +380,7 @@
     function get_scores() {
         global $db;
 
-        $sql = "SELECT crs_name as name, crs_score as score, crs_combo as combo FROM cr_scores WHERE 1 AND x = 1 ORDER BY crs_score DESC LIMIT 20";
+        $sql = "SELECT crs_name as name, crs_score as score, crs_combo as  \"max combo\" FROM cr_scores WHERE 1 AND x = 1 ORDER BY crs_score DESC LIMIT 20";
         $rsArray = array();
         $result = $db->query($sql);
 

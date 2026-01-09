@@ -35,7 +35,8 @@ const crossy = {
     lastspc: 0, //time since last space (forward jump)
     bonus: 0, //bonus points
     bonuspts: 3, //points per combo
-    mxcombo: 0
+    mxcombo: 0, //highest combo
+    combo: 0 //current combo
 }
 
 
@@ -207,6 +208,7 @@ function initialize() {
     crossy.bonus = 0;
     crossy.bonuspts = 3;
     crossy.mxcombo = 0;
+    crossy.combo = 0;
 
     // canvas.width = (game_vals.x - game_vals.xx) * game_vals.scale;
     canvas.width = game_vals.x * game_vals.scale;
@@ -363,7 +365,7 @@ function score_check() {
 }
 
 function combo_check() {
-    document.getElementById("combo").innerText = crossy.mxcombo;
+    document.getElementById("combo").innerText = crossy.combo;
 }
 
 function draw(ts) {
@@ -533,7 +535,8 @@ function update(ts) {
                         crossy.anii = 6;
                         crossy.x--; 
                     }
-                    crossy.count = 0;
+                    // crossy.count = 0;
+                    // crossy.combo = 0;
                     break;
 
                 case "KeyD":
@@ -541,19 +544,22 @@ function update(ts) {
                         crossy.anii = 10;
                         crossy.x++; 
                     }
-                    crossy.count = 0;
+                    // crossy.count = 0;
+                    // crossy.combo = 0;
                     break;
 
                 case "KeyS":
                     if (crossy.y > 0) { crossy.y--; }
                     crossy.anii = 0;
                     crossy.count = 0;
+                    crossy.combo = 0;
                     break;
                     
                 case "Space":
                     //check time limit for combo
-                    if(ts - crossy.lastspc > 1000){
+                    if(ts - crossy.lastspc > 3000){
                         crossy.count = 0;
+                        crossy.combo = 0;
                     }
 
 
@@ -565,7 +571,11 @@ function update(ts) {
                         crossy.bonus += crossy.bonuspts;
                         console.log("orig score", crossy.y)
                         console.log("bonus points", crossy.bonus)
-                        crossy.mxcombo +=1;
+                        crossy.combo +=1;
+
+                        if (crossy.combo > crossy.mxcombo){
+                            crossy.mxcombo = crossy.combo;
+                        }
                     }
 
                     // Obstacle
