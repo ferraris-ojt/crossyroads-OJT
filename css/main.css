@@ -32,6 +32,12 @@ div {
     text-align: center;
 }
 
+#combo {
+    font-size: 100px;
+    text-align: center;
+    color: red;
+}
+
 #banner {
     font-size: 80px;
     text-align: center;

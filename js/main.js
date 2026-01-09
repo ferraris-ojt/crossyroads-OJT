@@ -34,7 +34,8 @@ const crossy = {
     count : 0, //# of space
     lastspc: 0, //time since last space (forward jump)
     bonus: 0, //bonus points
-    bonuspts: 3 //points per combo
+    bonuspts: 3, //points per combo
+    mxcombo: 0
 }
 
 
@@ -134,7 +135,8 @@ function update_score_db() {
     f_data['score'] = crossy.score;
     f_data['name'] = document.getElementById("name").value;
     f_data['data'] = crossy;
-
+    f_data['combo'] = crossy.mxcombo;
+    
     $.ajax({
         url : "api/crossy_db.php",
         type : "post",
@@ -204,6 +206,7 @@ function initialize() {
     crossy.lastspc = 0;
     crossy.bonus = 0;
     crossy.bonuspts = 3;
+    crossy.mxcombo = 0;
 
     // canvas.width = (game_vals.x - game_vals.xx) * game_vals.scale;
     canvas.width = game_vals.x * game_vals.scale;
@@ -357,6 +360,10 @@ function check_status(ts) {
 
 function score_check() {
     document.getElementById("score").innerText = crossy.score;
+}
+
+function combo_check() {
+    document.getElementById("combo").innerText = crossy.mxcombo;
 }
 
 function draw(ts) {
@@ -556,8 +563,9 @@ function update(ts) {
                     if (crossy.count >= 3){
                         //increase score per jump
                         crossy.bonus += crossy.bonuspts;
-                        // console.log("orig score", crossy.y)
-                        // console.log("bonus points", crossy.bonus)
+                        console.log("orig score", crossy.y)
+                        console.log("bonus points", crossy.bonus)
+                        crossy.mxcombo +=1;
                     }
 
                     // Obstacle
@@ -572,6 +580,7 @@ function update(ts) {
         crossy.kpts = ts;
     }
     score_check();
+    combo_check();
     draw(ts);
     
     window.requestAnimationFrame(update);

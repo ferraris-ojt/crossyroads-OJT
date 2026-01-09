@@ -354,7 +354,7 @@
 
 
             $name = $data['name'] ? $data['name'] : "Name PLS";
-            $sql = "INSERT INTO cr_scores (crs_ip, crs_name, crs_data, crs_score) VALUES ('{$data['ip']}', '{$name}', '" . json_encode($data) . "', '{$data['score']}')";
+            $sql = "INSERT INTO cr_scores (crs_ip, crs_name, crs_data, crs_score, crs_combo) VALUES ('{$data['ip']}', '{$name}', '" . json_encode($data) . "', '{$data['score']}', '{$data['combo']}')";
             $db->query($sql);    
             
         } else {
@@ -366,7 +366,7 @@
             }
 
             if ($res['crs_score'] < $data['score']) {
-                $sql = "UPDATE cr_scores SET crs_data = '" . json_encode($data) . "', crs_score = \"{$data['score']}\", x = 1 {$n_sql} WHERE 1 AND crs_id = {$res['crs_id']}";
+                $sql = "UPDATE cr_scores SET crs_data = '" . json_encode($data) . "', crs_score = \"{$data['score']}\", x = 1 {$n_sql}, crs_combo = \"{$data['combo']}\" WHERE 1 AND crs_id = {$res['crs_id']}";
             } else {
                 $sql = "UPDATE cr_scores SET crs_data = '" . json_encode($data) . "', x = 1 {$n_sql} WHERE 1 AND crs_id = {$res['crs_id']}";
             }
@@ -380,7 +380,7 @@
     function get_scores() {
         global $db;
 
-        $sql = "SELECT crs_name as name, crs_score as score FROM cr_scores WHERE 1 AND x = 1 ORDER BY crs_score DESC LIMIT 20";
+        $sql = "SELECT crs_name as name, crs_score as score, crs_combo as combo FROM cr_scores WHERE 1 AND x = 1 ORDER BY crs_score DESC LIMIT 20";
         $rsArray = array();
         $result = $db->query($sql);
 
@@ -395,7 +395,7 @@
     function reset_scores() {
         global $db;
 
-        $sql = "UPDATE cr_scores SET x = 0, crs_score = 0";
+        $sql = "UPDATE cr_scores SET x = 0, crs_score = 0, crs_combo = 0";
         $db->query($sql);
     }
 
