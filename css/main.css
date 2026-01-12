@@ -17,7 +17,20 @@ div {
     cursor: default;
 }
 
+/* container thats same size as canvas, stacks canvas and lose display */
+#game-wrapper {
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* background-color: black; */
+    width: 100%;
+    max-width: 800px;
+}
+
 #game_canvas {
+    /* position relative to display lose-gif on top */
+    position: relative;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -26,7 +39,20 @@ div {
     max-width: 800px;
     box-shadow: 5px 5px 10px 0px black;
     border-radius: 10px;
+    z-index: 1;
 }
+
+#lose-gif {
+    /* z-index higher than game_canvas */
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
 #score {
     font-size: 100px;
     text-align: center;
