@@ -33,67 +33,67 @@ $(document).ready(function(){
 });
 
 
-function start_timer(t = 0, m = 0) {
+// function start_timer(t = 0, m = 0) {
 
-    if (m == 0) { 
-        m = 1500; 
-        hide_display('start_timer');
-    }
-    if (t >= m) {
-        alert("Game Finished");
-        show_display('start_timer');
-        let tmr = document.getElementById("timer");
-        tmr.innerText = "";
-        return;
-    }
+//     if (m == 0) { 
+//         m = 1500; 
+//         hide_display('start_timer');
+//     }
+//     if (t >= m) {
+//         alert("Game Finished");
+//         show_display('start_timer');
+//         let tmr = document.getElementById("timer");
+//         tmr.innerText = "";
+//         return;
+//     }
 
-    let tmr = document.getElementById("timer");
+//     let tmr = document.getElementById("timer");
 
-    let tme = (((m - t) / 60) + "").split(".");
+//     let tme = (((m - t) / 60) + "").split(".");
 
-    let mins = tme[0];
-    let secs = tme[1] ? Math.round(parseFloat("." + tme[1]) * 60).toFixed(0) : 0;
-    tmr.innerText = mins + ":" + secs + " Time Left";
+//     let mins = tme[0];
+//     let secs = tme[1] ? Math.round(parseFloat("." + tme[1]) * 60).toFixed(0) : 0;
+//     tmr.innerText = mins + ":" + secs + " Time Left";
 
-    setTimeout( () => {
-        t++;
-        return start_timer(t, m);
-    }, 1000);
-}
+//     setTimeout( () => {
+//         t++;
+//         return start_timer(t, m);
+//     }, 1000);
+// }
 
-function screen_adjustment() {
+// function screen_adjustment() {
 
-    let m = 150;
-    let m_cont = document.getElementById("m_cont");
-    // m_cont.style.width = (window.innerWidth - 250) + "px";
-    // m_cont.style.maxWidth = (window.innerWidth - 250) + "px";
-    m_cont.style.height = (window.innerHeight - m) + "px";
-    m_cont.style.maxHeight = (window.innerHeight - m) + "px";
-    m_cont.style.marginTop = (m / 2) + "px";
+//     let m = 150;
+//     let m_cont = document.getElementById("m_cont");
+//     // m_cont.style.width = (window.innerWidth - 250) + "px";
+//     // m_cont.style.maxWidth = (window.innerWidth - 250) + "px";
+//     m_cont.style.height = (window.innerHeight - m) + "px";
+//     m_cont.style.maxHeight = (window.innerHeight - m) + "px";
+//     m_cont.style.marginTop = (m / 2) + "px";
 
 
-    let lg = document.getElementById("left_graphs");
+//     let lg = document.getElementById("left_graphs");
             
-    if (lg.offsetWidth >= 400) {
-        document.getElementById("2").width = 400;
-        document.getElementById("a").width = 400;
-    } else {
-        document.getElementById("2").style.width = 100 + "%";
-        // document.getElementById("a").style.width = 100 + "%";
-        document.getElementById("a").height = lg.offsetWidth;
-    }
+//     if (lg.offsetWidth >= 400) {
+//         document.getElementById("2").width = 400;
+//         document.getElementById("a").width = 400;
+//     } else {
+//         document.getElementById("2").style.width = 100 + "%";
+//         // document.getElementById("a").style.width = 100 + "%";
+//         document.getElementById("a").height = lg.offsetWidth;
+//     }
 
-    let rg = document.getElementById("right_graphs");
+//     let rg = document.getElementById("right_graphs");
     
-    if (rg.offsetWidth >= 400) {
-        document.getElementById("b").width = 400;
-    } else {
-        document.getElementById("b").style.width = 100 + "%";
-        document.getElementById("b").height = rg.offsetWidth;
-    }
+//     if (rg.offsetWidth >= 400) {
+//         document.getElementById("b").width = 400;
+//     } else {
+//         document.getElementById("b").style.width = 100 + "%";
+//         document.getElementById("b").height = rg.offsetWidth;
+//     }
 
 
-}
+// }
 
 function get_scores() {
 
@@ -136,28 +136,28 @@ function reset_scores() {
 
 }
 
-function grant_game_access(ag = 0) {
+// function grant_game_access(ag = 0) {
 
-    let r_data = {};
-    if (ag == 1) {
-        r_data['cmd'] = "allow_game";
-    } else {
-        r_data['cmd'] = "disallow_game";
-    }
-    $.ajax({
-        url : "api/crossy_db.php",
-        type : "post",
-        data : r_data,
-        success : () => {
+//     let r_data = {};
+//     if (ag == 1) {
+//         r_data['cmd'] = "allow_game";
+//     } else {
+//         r_data['cmd'] = "disallow_game";
+//     }
+//     $.ajax({
+//         url : "api/crossy_db.php",
+//         type : "post",
+//         data : r_data,
+//         success : () => {
             
-            if (ag) {
-                alert("Game Access Allowed");
-            } else {
-                alert("Game Access Not Allowed");
-            }
-        }
-    })
-}
+//             if (ag) {
+//                 alert("Game Access Allowed");
+//             } else {
+//                 alert("Game Access Not Allowed");
+//             }
+//         }
+//     })
+// }
 
 function create_table_view(data) {
 

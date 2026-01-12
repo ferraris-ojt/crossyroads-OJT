@@ -36,9 +36,14 @@ const crossy = {
     bonus: 0, //bonus points
     bonuspts: 3, //points per combo
     mxcombo: 0, //highest combo
-    combo: 0 //current combo
+    combo: 0, //current combo
+    time: 3, //time limit to retain combo
+    timerID : null //used to reset timer
 }
 
+function redirectToWebsite(url){
+    window.location.href = url;
+}
 
 window.addEventListener("keydown", (e) => {
     
@@ -203,12 +208,15 @@ function initialize() {
     crossy.kpint = 100;
     crossy.kpts = 0;
     crossy.score = 0;
-    crossy.count = 0;
-    crossy.lastspc = 0;
-    crossy.bonus = 0;
-    crossy.bonuspts = 3;
-    crossy.mxcombo = 0;
-    crossy.combo = 0;
+    crossy.count = 0; 
+    crossy.lastspc = 0; 
+    crossy.bonus = 0; 
+    crossy.bonuspts = 3; 
+    crossy.mxcombo = 0; 
+    crossy.combo = 0; 
+    crossy.time = 3; 
+    crossy.timerID = null; 
+
 
     // canvas.width = (game_vals.x - game_vals.xx) * game_vals.scale;
     canvas.width = game_vals.x * game_vals.scale;
@@ -514,6 +522,7 @@ function update(ts) {
     }
     check_status(ts);
     if (game_vals.state === "game_over") {
+        // redirectToWebsite('http://192.168.70.203/pbubble/');
         alert("Game Over");
         setTimeout( () => {
             initialize();
@@ -560,6 +569,7 @@ function update(ts) {
                     if(ts - crossy.lastspc > 3000){
                         crossy.count = 0;
                         crossy.combo = 0;
+                        // cmbtmr.innertext = "";
                     }
 
 
@@ -576,6 +586,7 @@ function update(ts) {
                         if (crossy.combo > crossy.mxcombo){
                             crossy.mxcombo = crossy.combo;
                         }
+                        combotimer();
                     }
 
                     // Obstacle
@@ -597,6 +608,88 @@ function update(ts) {
 
 }
 
+// const combotmr = document.getElementById('combo_timer');
+// const combo_time = 3000;
+// let startTime;
+// let animationId;
+
+// function startCombo(){
+//     window.cancelAnimationFrame(animationId);
+//     startTime = performance.now();
+//     updateTime();
+// }
+
+// function updateTime(currentTime) {
+//     const elapsed = currentTime - startTime;
+//     const remaining = Math.max(0, combo_time - elapsed);
+
+//     const sec = Math.floor(remaining / 1000);
+//     const milli = Math.floor(remaining % 1000);
+
+//      combotmr.innerText = sec + "." + milli + "s";
+
+//      if (remaining > 0) {
+//         animationId = requestAnimationFrame(updateTime);
+//      }
+
+//      else {
+//         combotmr.innerText = "";
+//      }
+
+
+// }
+
+// function combotimer(t = 0) {
+//     let ms = 3; //3 seconds
+//     console.log('timer function');
+
+//     if (t >= ms) {
+//         let cmbtmr = document.getElementById("combotmr");
+//         cmbtmr.innerText = "";
+//         return;
+//     }
+
+//     let cmbtmr = document.getElementById("combotmr");
+
+//     let tme = (((ms - t) / 1) + "").split(".");
+
+//     let sec = tme[0];
+//     cmbtmr.innerText = sec + "s";
+//     console.log(cmbtmr);
+
+
+//     setTimeout( () => {
+//         t++;
+//         return combotimer(t, ms);
+//     }, 1000);
+// }
+
+function combotimer(t=0){
+    let cmbtmr = document.getElementById("combotmr");
+
+    //reset timer if new one starting
+    if (t === 0 && crossy.timerID){
+        clearTimeout(crossy.timerID);
+        crossy.timerID = null;
+    }
+    
+    //clear timer if finished
+    if (t >= crossy.time){
+        cmbtmr.innerText = "";
+        crossy.timerID = null;
+        return;
+    }
+
+    let remainingtime = crossy.time - t;
+    cmbtmr.innerText = remainingtime + "s";
+
+    //recursive function
+    crossy. timerID = setTimeout(() => {
+        t++;
+        return combotimer(t);
+    }, 1000);
+
+}
 
 /**
  * 

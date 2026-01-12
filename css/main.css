@@ -38,6 +38,12 @@ div {
     color: red;
 }
 
+#combotmr {
+    font-size: 30px;
+    text-align: left;
+    color: black;
+}
+
 #banner {
     font-size: 80px;
     text-align: center;
