@@ -37,7 +37,8 @@ const crossy = {
     bonuspts: 3, //points per combo
     mxcombo: 0, //highest combo
     combo: 0, //current combo
-    time: 3
+    time: 3, //time limit to retain combo
+    timerID : null //used to reset timer
 }
 
 function redirectToWebsite(url){
@@ -207,13 +208,15 @@ function initialize() {
     crossy.kpint = 100;
     crossy.kpts = 0;
     crossy.score = 0;
-    crossy.count = 0;
-    crossy.lastspc = 0;
-    crossy.bonus = 0;
-    crossy.bonuspts = 3;
-    crossy.mxcombo = 0;
-    crossy.combo = 0;
-    crossy.time = 3;
+    crossy.count = 0; 
+    crossy.lastspc = 0; 
+    crossy.bonus = 0; 
+    crossy.bonuspts = 3; 
+    crossy.mxcombo = 0; 
+    crossy.combo = 0; 
+    crossy.time = 3; 
+    crossy.timerID = null; 
+
 
     // canvas.width = (game_vals.x - game_vals.xx) * game_vals.scale;
     canvas.width = game_vals.x * game_vals.scale;
@@ -663,21 +666,28 @@ function update(ts) {
 
 function combotimer(t=0){
     let cmbtmr = document.getElementById("combotmr");
+
+    //reset timer if new one starting
+    if (t === 0 && crossy.timerID){
+        clearTimeout(crossy.timerID);
+        crossy.timerID = null;
+    }
     
+    //clear timer if finished
     if (t >= crossy.time){
         cmbtmr.innerText = "";
+        crossy.timerID = null;
         return;
     }
 
     let remainingtime = crossy.time - t;
     cmbtmr.innerText = remainingtime + "s";
 
-    setTimeout(() => {
+    //recursive function
+    crossy. timerID = setTimeout(() => {
         t++;
         return combotimer(t);
     }, 1000);
-
-    console.log(cmbtmr);
 
 }
 
