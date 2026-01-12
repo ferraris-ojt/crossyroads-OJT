@@ -47,6 +47,7 @@ const crossy = {
 
 var j_sound = new Audio("audio/jump.mp3");
 var d_sound = new Audio("audio/die.mp3");
+var bg_sound = new Audio("audio/bg_music.mp3");
 
 function redirectToWebsite(url){
     window.location.href = url;
