@@ -1,5 +1,9 @@
 const canvas = document.getElementById("game_canvas");
 const ctx = canvas.getContext("2d");
+const screen = document.getElementById("game-wrapper");
+const game_lose = document.getElementById("lose-gif");
+
+game_lose.src = "images/explosion.gif";
 
 const game_vals = {
     x : 10,
@@ -40,6 +44,9 @@ const crossy = {
     time: 3, //time limit to retain combo
     timerID : null //used to reset timer
 }
+
+var j_sound = new Audio("audio/jump.mp3");
+var d_sound = new Audio("audio/die.mp3");
 
 function redirectToWebsite(url){
     window.location.href = url;
@@ -197,6 +204,8 @@ function play_now() {
 
 function initialize() {
 
+    game_lose.style.display = "none";
+
     game_vals.ga = [];
 
     crossy.x = Math.round(game_vals.x / 2);
@@ -221,6 +230,8 @@ function initialize() {
     // canvas.width = (game_vals.x - game_vals.xx) * game_vals.scale;
     canvas.width = game_vals.x * game_vals.scale;
     canvas.height = game_vals.yy * game_vals.scale;
+    screen.width = game_vals.x * game_vals.scale;
+    screen.height = game_vals.yy * game_vals.scale;
     let lvl = 1;
     let tl = 0;
     
@@ -523,11 +534,15 @@ function update(ts) {
     check_status(ts);
     if (game_vals.state === "game_over") {
         // redirectToWebsite('http://192.168.70.203/pbubble/');
-        alert("Game Over");
+        play_sound(d_sound);
+        // // alert("Game Over");
+        
+        game_lose.style.display = 'block';
+        
         setTimeout( () => {
             initialize();
             window.requestAnimationFrame(update);
-        }, 1000);
+        }, 1500);
         return;
     }
     
@@ -544,6 +559,7 @@ function update(ts) {
                         crossy.anii = 6;
                         crossy.x--; 
                     }
+                    play_sound(j_sound);
                     // crossy.count = 0;
                     // crossy.combo = 0;
                     break;
@@ -555,6 +571,7 @@ function update(ts) {
                     }
                     // crossy.count = 0;
                     // crossy.combo = 0;
+                    play_sound(j_sound);
                     break;
 
                 case "KeyS":
@@ -562,6 +579,7 @@ function update(ts) {
                     crossy.anii = 0;
                     crossy.count = 0;
                     crossy.combo = 0;
+                    play_sound(j_sound);
                     break;
                     
                 case "Space":
@@ -571,8 +589,8 @@ function update(ts) {
                         crossy.combo = 0;
                         // cmbtmr.innertext = "";
                     }
-
-
+                    
+                    play_sound(j_sound);
                     crossy.count += 1;
                     crossy.lastspc = ts;
 
@@ -690,6 +708,16 @@ function combotimer(t=0){
     }, 1000);
 
 }
+
+function play_sound(sfx){
+    if (sfx) {
+        sfx.pause();
+        sfx.currentTime = 0;
+    }
+
+    sfx.play();
+}
+
 
 /**
  * 
