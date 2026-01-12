@@ -2,6 +2,7 @@ const canvas = document.getElementById("game_canvas");
 const ctx = canvas.getContext("2d");
 const screen = document.getElementById("game-wrapper");
 const game_lose = document.getElementById("lose-gif");
+const cmbtmr = document.getElementById("combotmr");
 
 game_lose.src = "images/explosion.gif";
 
@@ -535,10 +536,20 @@ function update(ts) {
     check_status(ts);
     if (game_vals.state === "game_over") {
         // redirectToWebsite('http://192.168.70.203/pbubble/');
+        if (crossy.timerID){
+            clearTimeout(crossy.timerID);
+            crossy.timerID = null;
+        }
+        cmbtmr.innerText = "";
+        // crossy.timerID = null;
+        // clearTimeout(crossy.timerID);
+        // combotimer(3);
         play_sound(d_sound);
         // // alert("Game Over");
+
         
         game_lose.style.display = 'block';
+
         
         setTimeout( () => {
             initialize();
@@ -627,65 +638,7 @@ function update(ts) {
 
 }
 
-// const combotmr = document.getElementById('combo_timer');
-// const combo_time = 3000;
-// let startTime;
-// let animationId;
-
-// function startCombo(){
-//     window.cancelAnimationFrame(animationId);
-//     startTime = performance.now();
-//     updateTime();
-// }
-
-// function updateTime(currentTime) {
-//     const elapsed = currentTime - startTime;
-//     const remaining = Math.max(0, combo_time - elapsed);
-
-//     const sec = Math.floor(remaining / 1000);
-//     const milli = Math.floor(remaining % 1000);
-
-//      combotmr.innerText = sec + "." + milli + "s";
-
-//      if (remaining > 0) {
-//         animationId = requestAnimationFrame(updateTime);
-//      }
-
-//      else {
-//         combotmr.innerText = "";
-//      }
-
-
-// }
-
-// function combotimer(t = 0) {
-//     let ms = 3; //3 seconds
-//     console.log('timer function');
-
-//     if (t >= ms) {
-//         let cmbtmr = document.getElementById("combotmr");
-//         cmbtmr.innerText = "";
-//         return;
-//     }
-
-//     let cmbtmr = document.getElementById("combotmr");
-
-//     let tme = (((ms - t) / 1) + "").split(".");
-
-//     let sec = tme[0];
-//     cmbtmr.innerText = sec + "s";
-//     console.log(cmbtmr);
-
-
-//     setTimeout( () => {
-//         t++;
-//         return combotimer(t, ms);
-//     }, 1000);
-// }
-
 function combotimer(t=0){
-    let cmbtmr = document.getElementById("combotmr");
-
     //reset timer if new one starting
     if (t === 0 && crossy.timerID){
         clearTimeout(crossy.timerID);
@@ -699,13 +652,17 @@ function combotimer(t=0){
         return;
     }
 
+    // if (!crossy.timerID) {
+    //     cmbtmr.innerText = "";
+    // }
+
     let remainingtime = crossy.time - t;
     cmbtmr.innerText = remainingtime + "s";
 
     //recursive function
-    crossy. timerID = setTimeout(() => {
-        t++;
-        return combotimer(t);
+    crossy.timerID = setTimeout(() => {
+            t++;
+            return combotimer(t);
     }, 1000);
 
 }
