@@ -36,6 +36,7 @@ const crossy = {
     kpint : 100,
     kpts : 0,
     score : 0,
+    y_prev: 0,
     count : 0, //# of space
     lastspc: 0, //time since last space (forward jump)
     bonus: 0, //bonus points
@@ -219,6 +220,7 @@ function initialize() {
     crossy.kpint = 100;
     crossy.kpts = 0;
     crossy.score = 0;
+    crossy.y_prev = 0;
     crossy.count = 0; 
     crossy.lastspc = 0; 
     crossy.bonus = 0; 
@@ -599,24 +601,28 @@ function update(ts) {
                     if(ts - crossy.lastspc > 3000){
                         crossy.count = 0;
                         crossy.combo = 0;
-                        // cmbtmr.innertext = "";
                     }
                     
                     play_sound(j_sound);
-                    crossy.count += 1;
-                    crossy.lastspc = ts;
 
-                    if (crossy.count >= 3){
-                        //increase score per jump
-                        crossy.bonus += crossy.bonuspts;
-                        console.log("orig score", crossy.y)
-                        console.log("bonus points", crossy.bonus)
-                        crossy.combo +=1;
+                    //check if player is actually moving forward (check if space is valid)
+                    if (crossy.y == crossy.y_prev){
+                        crossy.count++;
+                        crossy.lastspc = ts;
 
-                        if (crossy.combo > crossy.mxcombo){
-                            crossy.mxcombo = crossy.combo;
+                        if (crossy.count >= 3){
+                            //increase score per jump
+                            crossy.bonus += crossy.bonuspts;
+                            console.log("orig score", crossy.y)
+                            console.log("bonus points", crossy.bonus)
+                            crossy.combo ++;
+
+                            if (crossy.combo > crossy.mxcombo){
+                                crossy.mxcombo = crossy.combo;
+                            }
+                            combotimer();
                         }
-                        combotimer();
+                        crossy.y_prev++;    
                     }
 
                     // Obstacle
