@@ -1,6 +1,6 @@
 - Fixed timer bug for consecutive timer (initialization??)
 - Added jump and game over sfx
 - Added game over display
-- Added background music
+- Added looping background music
 - Removed game over alert and fixed timer reset for continuous gameplay
 - Fixed combo bug to only accept valid forward movement

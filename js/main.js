@@ -85,6 +85,10 @@ window.addEventListener("keydown", (e) => {
     }
 })
 
+bg_sound.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+}, false);
 
 var imgList = ["froggy.png", "obstacles.png"];
 var imgArr = {};
